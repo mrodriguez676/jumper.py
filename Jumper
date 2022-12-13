@@ -1,0 +1,117 @@
+import random 
+
+class Word:
+
+    def __init__(self):
+
+        self.wordlist = ["Orange","Bye", "Running", "Singing","Computer",
+                    "Laptop", "Door", "Shutter", "Apple", "Vaccum"]
+        self.wordCount= 10 
+
+    def getRandomWord(self):
+
+        i= random.randint(0, self.wordCount -1)
+
+        return self.wordlist[i]
+
+class Jumper:
+    def __init__(self):
+        self.jumper = [ '  ___    ',
+                        ' /___\   ',
+                        '  \ /    ',
+                        '  \ /    ',
+                        '   0     ',
+                        '  /|\    ',
+                        '  / \    ',
+                        '         ',
+                         "^^^^^^^"]
+    def draw(self):
+        for line in self.jumper:
+            print(line)
+        
+    def reduce(self):
+        self.jumper = self.jumper[1:]
+        if len(self.jumper) ==5:
+            self.jumper[0] = " X " ; 
+        
+    def finished(self):
+        if len (self.jumper) == 5:
+            return True 
+        else:
+            return False 
+class Console :
+    def getUserGuess(self):
+        letter = raw_input ("Guess a Letter [A-Z]:")
+        return letter 
+class Game:
+    def __init__(self):
+        self.words = Word()
+        self.jumper = Jumper()
+        self.console = Console()
+        
+        self.word = self.word.getRandomWord()
+        self.guess =""
+        
+        
+        for i in range(len(self.word)):
+            self.guess += "-"
+        self.finished = False
+        
+    def play(self):
+        print("\n" + self.guess)
+        self.jumper.draw()
+        if not self.finished:
+            guessLetters = self.console.getUserGuess()
+            changed = self.updateGuess(guessLetter)
+            
+            if not self.finished:
+                self.jumper.reduce()
+                
+    def updateGuess(self, guessLetter):
+        changed = False
+        for i in range(len(self.word)):
+            if self.word[i] ==guessLetter and self.guess[i] == "-":
+                self.guess = self.guess [0 :i] + guessLetter + self.guess[i , 1:]
+                changed = True 
+        return changed 
+    
+    def isFinished(self):
+        self.finished = True
+        for i in range (len(self.guess)):
+            if self.guess[i] == '-':
+                self.finished = False 
+        if self.finished or self.jumper.finished():
+            self.finished = True 
+            return True
+        else:
+            return False 
+    def reveal(self):
+        print("Correct Word" + self.word)
+game = Game()
+
+while not game.isFinished():
+    game.play()
+game.play()
+game.reveal()
+        
+                         
+                
+                
+                
+            
+                                   
+         
+            
+                            
+        
+        
+        
+        
+                 
+                              
+                       
+                       
+                    
+        
+
+    
